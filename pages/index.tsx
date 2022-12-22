@@ -10,14 +10,13 @@ export default function App() {
           type="text"
           className="w-full pl-4 py-2 outline-none border-2 border-blue-400 focus:border-blue-600 rounded-lg font-bold text-2xl"
           value={total}
-          onChange={(e) => setTotal(e.target.value)}
+          onChange={(e: any) => setTotal(e.target.value)}
         />
         <PayPalScriptProvider
           options={{
             "client-id":
               "AeeXSsrMzJT4wIV5uWdZELlqce9ixxNtdjCbGKjtSJ8yrqz1UVtvQ0jFRj-oZNs8f-G8PojBzQ63MOE6",
           }}
-          className="w-full"
         >
           <PayPalButtons
             forceReRender={[total]}
@@ -35,17 +34,20 @@ export default function App() {
                   {
                     amount: {
                       value: price.toString(),
-                      currency: "usd",
                     },
                   },
                 ],
               });
             }}
-            onApprove={(data, actions) => {
-              return actions.order.capture().then((details) => {
-                const name = details.payer.name.given_name;
-                alert(`Transaction completed by ${name}`);
-              });
+            onApprove={(data: any, actions: any) => {
+              try {
+                return actions.order.capture().then((details: any) => {
+                  const name = details.payer.name.given_name;
+                  alert(`Transaction completed by ${name}`);
+                });
+              } catch (err) {
+                console.log(err);
+              }
             }}
           />
         </PayPalScriptProvider>
