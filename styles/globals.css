@@ -7,6 +7,7 @@ body {
   margin: 0;
 }
 
-.paypal-button .paypal-button-color-gold {
-  background-color: red !important;
+
+.paypal-button-container {
+  width: 1200px !important;
 }
